@@ -10,6 +10,7 @@ IMAGE_LABEL=""
 IMAGE_TAG=""
 PLATFORM="linux/x86_64"
 CACHE_OPTION=""
+CONTEXT_PATH="${SCRIPT_DIR}"
 
 # Display help message
 show_help() {
@@ -44,6 +45,7 @@ parse_args() {
             -T|--image-tag) IMAGE_TAG="$2"; shift ;;
             --targets-config) TARGETS_CONFIG="$2"; shift ;;
             -f|--dockerfile) DOCKERFILE="$2"; shift ;;
+            --context) CONTEXT_PATH="$2"; shift ;;
             --platform) PLATFORM="$2"; shift ;;
             --no-cache) CACHE_OPTION="--no-cache" ;;
             *) echo "Unknown parameter passed: $1"; exit 1 ;;
@@ -70,6 +72,12 @@ parse_args "$@"
 # Read targets from the configuration file
 TARGETS=$(cat "$TARGETS_CONFIG" | xargs)
 
-# Pass each target as a build argument and control cache usage
-docker build $CACHE_OPTION . -t "${IMAGE_LABEL}:${IMAGE_TAG}" -f "${DOCKERFILE}" --platform "${PLATFORM}" \
-$(echo $TARGETS | xargs -n1 | awk '{print "--build-arg TARGETS[]="$1}')
+#Pass each target as a build argument and control cache usage
+docker build \
+    $CACHE_OPTION \
+    -t "${IMAGE_LABEL}:${IMAGE_TAG}" \
+    -f "${DOCKERFILE}" \
+    --platform "${PLATFORM}" \
+    --build-arg TARGETS="$TARGETS" \
+    ${CONTEXT_PATH}
+
