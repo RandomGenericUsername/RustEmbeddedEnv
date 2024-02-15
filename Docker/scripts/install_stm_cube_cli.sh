@@ -4,7 +4,8 @@
 set timeout 300
 
 # Fetch the environment variable
-cd /home/.packages/stm-cube-cli
+cd $env(PACKAGES_DIR)/stm-cube-cli
+
 system chmod +x ./stm_cube_cli.sh
 # Launch the STM32CubeIDE installation script.
 spawn ./stm_cube_cli.sh

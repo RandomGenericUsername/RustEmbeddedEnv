@@ -1,0 +1,1 @@
+DIRECTORIES = ["Common", "Drivers", "Utils"]
