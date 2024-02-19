@@ -43,8 +43,8 @@ RUN python3 -m venv $PYTHON_VENV_PATH && \
 
 RUN chmod +x $SCRIPTS_DIR/*.sh && \
     $SCRIPTS_DIR/install_stlink.sh && \
-    $SCRIPTS_DIR/install_stm_cube_cli.sh && \
-    ln -s $SCRIPTS_DIR/create_project.py /usr/local/bin/create_project
+    $SCRIPTS_DIR/install_stm_cube_cli.sh
+    #ln -s $SCRIPTS_DIR/create_project.py /usr/local/bin/create_project
 
 
 
