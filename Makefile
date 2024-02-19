@@ -19,6 +19,10 @@ YQ=/usr/local/bin/yq
 HOST_ARCH:=$(shell $(YQ) e '.host' $(CONFIG_FILE))
 DOCKER_PLATFORM:="linux/$(HOST_ARCH)"
 
+# Directories for volume mounting
+DEV_ENV_CONT=/etc/embedded/scripts/
+DEV_ENV_HOST=/home/inumaki/Development/RustEmbeddedEnv/Docker/scripts
+
 
 # New target to install yq
 # Rule to install yq
@@ -52,6 +56,10 @@ start_container:
 
 stop_container:
 	@sudo docker stop ${IMAGE_LABEL} 
+
+dev_run_container:
+	@sudo docker run --name ${IMAGE_LABEL} -it --privileged -v /dev/bus/usb:/dev/bus/usb -v ${DEV_ENV_HOST}:${DEV_ENV_CONT} ${IMAGE_LABEL}:${IMAGE_TAG}
+
 
 #stop_all_running_images:
 #	@sudo docker stop $$(docker ps -aq)
