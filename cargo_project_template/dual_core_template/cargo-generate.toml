@@ -1,0 +1,3 @@
+[placeholders]
+gdb_degugger_option = { type = "string", prompt = "GDB debugger configuration" }
+target_architecture = { type = "string", prompt = "Target architecture" }
