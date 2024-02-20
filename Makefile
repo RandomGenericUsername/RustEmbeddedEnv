@@ -21,7 +21,7 @@ DOCKER_PLATFORM:="linux/$(HOST_ARCH)"
 
 # Directories for volume mounting
 DEV_ENV_CONT=/etc/embedded/scripts/
-DEV_ENV_HOST=/home/inumaki/Development/RustEmbeddedEnv/Docker/scripts
+DEV_ENV_HOST=/home/inumaki/Development/RustEmbeddedEnv/Docker/cargo_project_template
 
 
 # New target to install yq
