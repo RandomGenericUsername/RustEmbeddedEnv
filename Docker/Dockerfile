@@ -1,12 +1,12 @@
 FROM rust:latest as base-image-dependencies
 
-
 ### env vars
-#ENV ST_LINK_CLT_PATH=/opt/st/stm32cubeclt
+ENV USER=root
+
 ENV PACKAGES_DIR=/etc/embedded/packages
 ENV SCRIPTS_DIR=/etc/embedded/scripts
+
 ENV PYTHON_REQUIREMENTS=/etc/embedded/requirements/python_requirements.txt
-ENV USER=root
 ENV PYTHON_VENV_PATH=/opt/venv
 ENV PYTHON_PIP=$PYTHON_VENV_PATH/bin/pip
 ENV PYTHON=$PYTHON_VENV_PATH/bin/python3
@@ -35,7 +35,7 @@ FROM base-image-dependencies as config-scripts
 ###
 COPY ./Docker/scripts $SCRIPTS_DIR 
 COPY ./Docker/packages $PACKAGES_DIR 
-COPY ./Docker/scripts/python_requirements.txt $PYTHON_REQUIREMENTS 
+COPY ./Docker/python_requirements.txt $PYTHON_REQUIREMENTS 
 
 # create venv for python
 RUN python3 -m venv $PYTHON_VENV_PATH && \

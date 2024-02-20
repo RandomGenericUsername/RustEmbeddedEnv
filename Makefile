@@ -8,9 +8,9 @@ DOCKERFILE=Dockerfile
 DOCKERFILE_PATH=${DOCKER_CONTEXT_PATH}/${DOCKERFILE}
 
 ##
-CONFIG_FILE_PATH=./
-CONFIG_FILE_NAME=config.yaml
-CONFIG_FILE=${CONFIG_FILE_PATH}/${CONFIG_FILE_NAME}
+PROJECT_CONFIGURATION_DIR=./project_configuration
+DOCKER_BUILD_CONFIG=docker_build_config.yaml
+CONFIG_FILE=${PROJECT_CONFIGURATION_DIR}/${DOCKER_BUILD_CONFIG}
 
 # Define the path to the yq binary, adjust as necessary
 YQ=/usr/local/bin/yq
