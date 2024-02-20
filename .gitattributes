@@ -1,0 +1,1 @@
+Docker/packages/stm-cube-cli/stm_cube_cli.sh filter=lfs diff=lfs merge=lfs -text

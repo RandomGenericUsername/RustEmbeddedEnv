@@ -1,0 +1,45 @@
+{
+	"mcu_family": "STM32H7",
+	"debug_configuration" : "gdb-multiarch",
+	"config": [
+		{
+			"core": "cortex-m4",
+			"arch": "thumbv7em-none-eabi",
+			"openocd_cfg" : {"interface" : "stlink.cfg", "target" : "stm32f4x.cfg"},
+			"memory": {
+				"flash": [
+					"0x08100000",
+					"1024K"
+				],
+				"ram": [
+					"0x10000000",
+					"288K"
+				]
+			}
+		},
+		{
+			"core": "cortex-m7",
+			"arch": "thumbv7em-none-eabi",
+			"openocd_cfg" : {"interface" : "stlink.cfg", "target" : "stm32h7x_dual_bank.cfg"},
+			"memory": {
+				"flash": [
+					"0x08000000",
+					"1024K"
+				],
+				"ram": [
+					"0x20000000",
+					"128K"
+				],
+				"extra_sections": 
+					{
+						"memory_type": "itcm_ram",
+						"origin": "0x00000000",
+						"length": "64K"
+					}
+				
+			}
+		}
+	]
+
+
+}

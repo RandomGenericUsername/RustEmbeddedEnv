@@ -1,0 +1,25 @@
+{
+	"mcu_family": "STM32F4",
+	
+	"config": {
+		"core": "cortex-m4",
+		"arch": "thumbv7em-none-eabi",
+		"memory": {
+			"flash": [
+				"0x8000000",
+				"512K"
+			],
+			"ram": [
+				"0x20000000",
+				"128K"
+			]
+		}
+	},
+
+	"directories": [
+		"examples_dir",
+		"custom_dir"
+	],
+
+	"arch" : "thumbv7em-none-eabi"
+}
