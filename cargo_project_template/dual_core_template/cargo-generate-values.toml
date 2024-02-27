@@ -1,3 +1,0 @@
-[values]
-gdb_degugger_option="gdb-multiarch -q -x openocd.gdb"
-target_architecture="thumbv7em-none-eabi"

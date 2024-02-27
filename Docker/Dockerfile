@@ -28,7 +28,8 @@ RUN cargo install \
     cargo-embed \
     cargo-binutils \
     && \
-    rustup component add llvm-tools-preview
+    rustup component add llvm-tools-preview &&\
+    rustup component add rustfmt
 
 FROM base-image-dependencies as config-scripts 
 

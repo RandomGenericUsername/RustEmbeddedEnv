@@ -20,8 +20,8 @@ HOST_ARCH:=$(shell $(YQ) e '.host' $(CONFIG_FILE))
 DOCKER_PLATFORM:="linux/$(HOST_ARCH)"
 
 # Directories for volume mounting
-DEV_ENV_CONT=/etc/embedded/scripts/
-DEV_ENV_HOST=/home/inumaki/Development/RustEmbeddedEnv/Docker/cargo_project_template
+DEV_ENV_CONT=/etc/embedded/dev
+DEV_ENV_HOST=/home/inumaki/Development/RustProjects
 
 
 # New target to install yq
@@ -46,7 +46,7 @@ build_docker_image: install
 	@docker build -t $(IMAGE_LABEL):$(IMAGE_TAG) -f $(DOCKERFILE_PATH) --platform $(DOCKER_PLATFORM) ${DOCKER_CONTEXT_PATH}
 
 run_container:
-	@sudo docker run --name ${IMAGE_LABEL} -it --privileged -v /dev/bus/usb:/dev/bus/usb ${IMAGE_LABEL}:${IMAGE_TAG}
+	@sudo docker run --name ${IMAGE_LABEL} -it --privileged -v /dev/bus/usb:/dev/bus/usb  -v ${DEV_ENV_HOST}:${DEV_ENV_CONT} ${IMAGE_LABEL}:${IMAGE_TAG}
 
 test_run_container:
 	@sudo docker run --name ${IMAGE_LABEL} -it --rm --privileged -v /dev/bus/usb:/dev/bus/usb ${IMAGE_LABEL}:${IMAGE_TAG}
@@ -58,7 +58,7 @@ stop_container:
 	@sudo docker stop ${IMAGE_LABEL} 
 
 dev_run_container:
-	@sudo docker run --name ${IMAGE_LABEL} -it --privileged -v /dev/bus/usb:/dev/bus/usb -v ${DEV_ENV_HOST}:${DEV_ENV_CONT} ${IMAGE_LABEL}:${IMAGE_TAG}
+	@sudo docker run --name ${IMAGE_LABEL} -it --rm --privileged -v /dev/bus/usb:/dev/bus/usb -v ${DEV_ENV_HOST}:${DEV_ENV_CONT} ${IMAGE_LABEL}:${IMAGE_TAG}
 
 
 #stop_all_running_images:
