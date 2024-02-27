@@ -3,9 +3,6 @@ FROM rust:latest as base-image-dependencies
 ### env vars
 ENV USER=root
 
-ENV PACKAGES_DIR=/etc/embedded/packages
-ENV SCRIPTS_DIR=/etc/embedded/scripts
-
 ENV PYTHON_REQUIREMENTS=/etc/embedded/requirements/python_requirements.txt
 ENV PYTHON_VENV_PATH=/opt/venv
 ENV PYTHON_PIP=$PYTHON_VENV_PATH/bin/pip
@@ -34,17 +31,15 @@ RUN cargo install \
 FROM base-image-dependencies as config-scripts 
 
 ###
-COPY ./Docker/scripts $SCRIPTS_DIR 
-COPY ./Docker/packages $PACKAGES_DIR 
 COPY ./Docker/python_requirements.txt $PYTHON_REQUIREMENTS 
 
 # create venv for python
 RUN python3 -m venv $PYTHON_VENV_PATH && \
     $PYTHON_PIP install -r $PYTHON_REQUIREMENTS
 
-RUN chmod +x $SCRIPTS_DIR/*.sh && \
-    $SCRIPTS_DIR/install_stlink.sh && \
-    $SCRIPTS_DIR/install_stm_cube_cli.sh
+#RUN chmod +x $SCRIPTS_DIR/*.sh && \
+#    $SCRIPTS_DIR/install_stlink.sh && \
+#    $SCRIPTS_DIR/install_stm_cube_cli.sh
     #ln -s $SCRIPTS_DIR/create_project.py /usr/local/bin/create_project
 
 

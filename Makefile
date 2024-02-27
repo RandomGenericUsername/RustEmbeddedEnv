@@ -27,8 +27,8 @@ DEV_ENV_HOST=/home/inumaki/Development/RustProjects
 # New target to install yq
 # Rule to install yq
 install_yq:
-	@echo "Installing yq..."
 	@if ! command -v yq > /dev/null; then \
+		echo "Installing yq..."
 		sudo wget https://github.com/mikefarah/yq/releases/download/v4.27.2/yq_linux_amd64 -O $(YQ) && sudo chmod +x $(YQ); \
 		echo "yq installed successfully at $(YQ)"; \
 	else \
